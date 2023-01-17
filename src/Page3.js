@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./Page3.css";
-import axios from "axios";
+import axios, { all } from "axios";
 
 const Page3 = () => {
   const [people, setPeople] = useState([]);
-  const [location, setLocation] = useState([]);
+  const [flatlocation, setflatLocation] = useState([]);
 
   const fetchData = async () => {
     return await axios
@@ -18,13 +18,11 @@ const Page3 = () => {
       });
   };
 
-  const flattenedlocations = (location) => {
-    console.log(location);
-  };
   useEffect(() => {
     fetchData().then((allPeople) => {
       setPeople(allPeople);
-      console.log(allPeople);
+      allPeople?.map((person) => setflatLocation(person.location));
+      console.log("this is", flatlocation);
     });
   }, []);
   return (
